@@ -56,5 +56,6 @@ def writePageSource(pageSource, fileName):
   file.write_text(pageSource)
   print('Write')
 
-# 実行
-main()
+# 本ファイルをインポートした時に main() 関数が実行されないようにする
+if __name__ == '__main__':
+  main()
