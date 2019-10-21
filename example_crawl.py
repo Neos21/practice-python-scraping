@@ -8,8 +8,11 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-# メイン
 def main():
+  """
+  メイン関数
+  """
+  
   prepareHtmlDirectory()
   driver = createDriver()
   
@@ -19,8 +22,16 @@ def main():
   time.sleep(1)
   driver.quit()
 
-# ChromeDriver を生成する
 def createDriver():
+  """
+  Chrome WebDriver を生成する
+  
+  Returns
+  -------
+  driver : webdriver.Chrome
+    WebDriver
+  """
+  
   # ChromeDriver のパスを指定する
   executablePath = '/usr/local/bin/chromedriver'
   # Chrome オプション
@@ -30,13 +41,15 @@ def createDriver():
     chromeOptions.add_argument('--headless')
   chromeOptions.add_argument('--disable-gpu')
   chromeOptions.add_argument('--no-sandbox')
-  # ChromeDriver を生成する
-  # - もしグローバル変数を変更する場合は 'global driver' とグローバル宣言を行う
+  # ChromeDriver を生成する : もしグローバル変数を変更する場合は 'global driver' とグローバル宣言を行う
   driver = webdriver.Chrome(executable_path = executablePath, options = chromeOptions)
   return driver
 
-# ./html/ ディレクトリを作成する
 def prepareHtmlDirectory():
+  """
+  ./html/ ディレクトリを作成する
+  """
+  
   htmlDir = Path(Path.cwd()).joinpath('html')
   if not htmlDir.exists():
     htmlDir.mkdir()
@@ -44,17 +57,42 @@ def prepareHtmlDirectory():
   else:
     print('HTML Directory is already exists')
 
-# URL を指定してソースを取得する
 def getPageSource(driver, url):
+  """
+  URL を指定してソースを取得する
+  
+  Parameters
+  ----------
+  driver : webdriver.Chrome
+    WebDriver
+  url : str
+    URL
+  
+  Returns
+  -------
+  page_source : str
+    HTML ソース
+  """
+  
   driver.get(url)
   print(f'{url} : {driver.title}')
   return driver.page_source
 
-# ソースをファイルに書き出す
 def writePageSource(pageSource, fileName):
+  """
+  ソースをファイルに書き出す
+  
+  Parameters
+  ----------
+  pageSource : str
+    HTML ソース
+  fileName : str
+    保存ファイル名
+  """
+  
   file = Path(Path.cwd()).joinpath('html').joinpath(fileName)
   file.write_text(pageSource)
-  print('Write')
+  print('Write Success')
 
 # 本ファイルをインポートした時に main() 関数が実行されないようにする
 if __name__ == '__main__':

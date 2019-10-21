@@ -37,3 +37,25 @@ $ pipenv run start
 - 複数行コメントアウトはダブルクォート3つ `"""` で囲む
 - シングルクォートとダブルクォートの違いはなし (JavaScript と同じ)
 - `print(f'str')` は `print('str'.format())` の糖衣構文
+
+
+# 2019-10-21
+
+- MacOS で試したらヘッドレス Chrome が上手く動かなかった
+  - `--headless` を外し、`chromedriver_binary` を使わずに `executable_path` を指定すれば動いた
+- 関数定義は `def`
+  - インタプリタなのでグローバルなスコープから未定義の関数を呼び出せない
+  - メイン処理を先頭に書きたい場合は `main()` 関数を定義し、末尾で `main()` を実行すれば良い
+- 当該 `.py` ファイルを `import` されたときに `main()` 関数を実行しないようにするには、`if __name__ == '__main__':` という条件で判断すれば良い
+- `if:`・`elif:`・`else:`。真偽値を反転するには `!` ではなく `not` を使う
+- `pathlib.Path` でファイルやディレクトリの操作ができる
+- 辞書 (Dict) は `{}` で宣言し、`myDict['key'] = value` と設定していく
+- リスト (List) は `[]` で宣言し、`myList.append(item)` と追加していく
+- 辞書は `import json` モジュールの `json.dump()` を使えば、JSON 形式に変換してファイルに保存できる
+
+```sh
+# HTML のパースに使える BeautifulSoup4 をインストールする
+$ pipenv install beautifulsoup4
+```
+
+- ドキュメンテーションコメントのことは docstring と呼ぶ。書き方には種類があるが、複数行コメントで関数内などに書けば良い

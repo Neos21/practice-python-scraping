@@ -9,6 +9,7 @@ verify_ssl = true
 start = "python example_crawl.py"
 
 [dev-packages]
+pylint = "*"
 
 [packages]
 selenium = "*"
