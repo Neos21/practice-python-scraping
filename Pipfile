@@ -6,13 +6,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [scripts]
-start = "python example.py"
+start = "python example_crawl.py"
 
 [dev-packages]
 
 [packages]
 selenium = "*"
 chromedriver-binary = "~=77.0"
+beautifulsoup4 = "*"
 
 [requires]
 python_version = "3.7"
