@@ -16,6 +16,9 @@
   - スクレイピング
 
 ```sh
+# pip3 で pipenv をインストールする
+$ pip install pipenv
+
 # Pipfile を生成する
 $ pipenv --python 3.7
 
@@ -30,8 +33,12 @@ $ python example.py
 
 # Pipfile の '[scripts] start = ' に書いたスクリプトを実行する
 $ pipenv run start
+
+# pipenv を効かせて実行するには以下のように書く
+$ pipenv run python example.py
 ```
 
+- VSCode の Python Extension Pack をインストールしておくと良い
 - 単一行コメントアウトはシャープ `#`
   - Pipfile もシャープでコメントアウトできる
 - 複数行コメントアウトはダブルクォート3つ `"""` で囲む

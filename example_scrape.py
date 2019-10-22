@@ -46,7 +46,7 @@ def getHtml(fileName):
   """
   
   file = Path(Path.cwd()).joinpath('html').joinpath(fileName)
-  html = file.read_text()
+  html = file.read_text(encoding = 'utf-8')
   return html
 
 def parseHtml(html):
@@ -87,24 +87,24 @@ def scrape(soup):
   scrapedDict = {}
   
   # id 指定で要素を1つ取得してみる : select() を使うと CSS セレクタで取得できる
-  scrapedDict['footer_text'] = soup.select('#footer > p')[0].string
-  print('#footer > p')
-  print('  ' + scrapedDict['footer_text'])
+  scrapedDict['my_text'] = soup.select('a.gb_e')[0].string
+  print('my_text')
+  print('  ' + scrapedDict['my_text'])
   
   # p 要素を全て取得してみる
-  paragraphElements = soup.find_all('p')
+  elements = soup.find_all('a')
   # リストを宣言する
-  paragraphList = []
-  print('p')
+  elementList = []
+  print('a_elements')
   # 配列の長さを取得してループすることで index を取得する
-  # index が不要なら 'for paragraphElement in paragraphElements:' としても良い
-  for index in range(len(paragraphElements)):
-    paragraphElement = paragraphElements[index]
-    paragraphString = paragraphElement.string
+  # index が不要なら 'for element in elements:' としても良い
+  for index in range(len(elements)):
+    element = elements[index]
+    paragraphString = element.string
     print(f'  [{index}] : {paragraphString}')
-    paragraphList.append(paragraphString)
+    elementList.append(paragraphString)
   # 辞書に格納する
-  scrapedDict['paragraphs'] = paragraphList
+  scrapedDict['a_elements'] = elementList
   
   return scrapedDict
 
@@ -121,8 +121,9 @@ def writeJson(scrapedDict, fileName):
   """
   
   jsonFile = Path(Path.cwd()).joinpath('json').joinpath(fileName)
-  with jsonFile.open('w') as file:
-    json.dump(scrapedDict, file, indent = 2)
+  with jsonFile.open('w', encoding = 'utf-8') as file:
+    # Unicode 出力しないようにする
+    json.dump(scrapedDict, file, indent = 2, ensure_ascii = False)
 
 # 本ファイルをインポートした時に main() 関数が実行されないようにする
 if __name__ == '__main__':

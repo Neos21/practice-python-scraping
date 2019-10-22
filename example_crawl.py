@@ -3,7 +3,7 @@ import platform
 import time
 
 # MacOS では executable_path で指定しないと上手く読み込めなかった
-#import chromedriver_binary
+import chromedriver_binary
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -33,16 +33,20 @@ def createDriver():
   """
   
   # ChromeDriver のパスを指定する
-  executablePath = '/usr/local/bin/chromedriver'
+  #executablePath = '/usr/local/bin/chromedriver'
   # Chrome オプション
   chromeOptions = webdriver.ChromeOptions()
   # MacOS では Headless モードにすると上手く起動しなかったので避ける
   if platform.system() != 'Darwin':
+    print('Headless Mode')
     chromeOptions.add_argument('--headless')
   chromeOptions.add_argument('--disable-gpu')
   chromeOptions.add_argument('--no-sandbox')
   # ChromeDriver を生成する : もしグローバル変数を変更する場合は 'global driver' とグローバル宣言を行う
-  driver = webdriver.Chrome(executable_path = executablePath, options = chromeOptions)
+  driver = webdriver.Chrome(
+    #executable_path = executablePath,
+    options = chromeOptions
+  )
   return driver
 
 def prepareHtmlDirectory():
@@ -91,7 +95,7 @@ def writePageSource(pageSource, fileName):
   """
   
   file = Path(Path.cwd()).joinpath('html').joinpath(fileName)
-  file.write_text(pageSource)
+  file.write_text(pageSource, encoding = 'utf-8')
   print('Write Success')
 
 # 本ファイルをインポートした時に main() 関数が実行されないようにする
