@@ -66,3 +66,23 @@ $ pipenv install beautifulsoup4
 ```
 
 - ドキュメンテーションコメントのことは docstring と呼ぶ。書き方には種類があるが、複数行コメントで関数内などに書けば良い
+
+
+# 2019-11-05
+
+- `write_text()` では `newline = '\n'` が指定できなかった
+- Docker Compose 使ってみる
+
+```sh
+$ docker-compose up -d
+Building my-python
+# …中略…
+Creating my-python ... done
+
+$ docker ps
+CONTAINER ID        IMAGE                                COMMAND               CREATED             STATUS              PORTS               NAMES
+81526a50b822        practice-python-scraping_my-python   "tail -f /dev/null"   10 seconds ago      Up 9 seconds                            my-python
+
+$ docker exec -it my-python bash
+# docker-dompose.yaml の working_dir で指定したディレクトリで bash 接続できる
+```
