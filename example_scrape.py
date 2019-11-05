@@ -16,7 +16,7 @@ def main():
   scrapedDict = scrape(soup)
   writeJson(scrapedDict, 'google.json')
   
-  print('End')
+  print('Finished')
 
 def prepareJsonDirectory():
   """
@@ -121,7 +121,7 @@ def writeJson(scrapedDict, fileName):
   """
   
   jsonFile = Path(Path.cwd()).joinpath('json').joinpath(fileName)
-  with jsonFile.open('w', encoding = 'utf-8') as file:
+  with jsonFile.open('w', encoding = 'utf-8', newline = None) as file:
     # Unicode 出力しないようにする
     json.dump(scrapedDict, file, indent = 2, ensure_ascii = False)
 

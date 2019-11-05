@@ -1,26 +1,26 @@
-from pathlib import Path
 import platform
 import time
+from pathlib import Path
 
-# MacOS では executable_path で指定しないと上手く読み込めなかった
 import chromedriver_binary
-
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
 def main():
   """
   メイン関数
   """
   
-  prepareHtmlDirectory()
   driver = createDriver()
-  
-  pageSource = getPageSource(driver, 'http://google.com/')
-  writePageSource(pageSource, 'google.html')
-  
-  time.sleep(1)
-  driver.quit()
+  try:
+    prepareHtmlDirectory()
+    pageSource = getPageSource(driver, 'http://google.com/')
+    writePageSource(pageSource, 'google.html')
+  except Exception as error:
+    print('An error occurred', error)
+  finally:
+    time.sleep(1)
+    driver.quit()
+    print('Finished')
 
 def createDriver():
   """
@@ -32,21 +32,22 @@ def createDriver():
     WebDriver
   """
   
-  # ChromeDriver のパスを指定する
-  #executablePath = '/usr/local/bin/chromedriver'
   # Chrome オプション
   chromeOptions = webdriver.ChromeOptions()
-  # MacOS では Headless モードにすると上手く起動しなかったので避ける
+  chromeOptions.add_argument('--disable-gpu')
+  chromeOptions.add_argument('--no-sandbox')
+  
+  # MacOS では Headless モードにすると上手く起動しなかったので避ける・executable_path の指定が必要
   if platform.system() != 'Darwin':
     print('Headless Mode')
     chromeOptions.add_argument('--headless')
-  chromeOptions.add_argument('--disable-gpu')
-  chromeOptions.add_argument('--no-sandbox')
-  # ChromeDriver を生成する : もしグローバル変数を変更する場合は 'global driver' とグローバル宣言を行う
-  driver = webdriver.Chrome(
-    #executable_path = executablePath,
-    options = chromeOptions
-  )
+    driver = webdriver.Chrome(options = chromeOptions)
+  else:
+    print('Normal Mode (MacOS)')
+    driver = webdriver.Chrome(
+      executable_path = '/usr/local/bin/chromedriver',
+      options = chromeOptions
+    )
   return driver
 
 def prepareHtmlDirectory():
@@ -94,9 +95,9 @@ def writePageSource(pageSource, fileName):
     保存ファイル名
   """
   
-  file = Path(Path.cwd()).joinpath('html').joinpath(fileName)
-  file.write_text(pageSource, encoding = 'utf-8')
-  print('Write Success')
+  htmlFile = Path(Path.cwd()).joinpath('html').joinpath(fileName)
+  with htmlFile.open('w', encoding = 'utf-8', newline = '\n') as file:
+    file.write(pageSource)
 
 # 本ファイルをインポートした時に main() 関数が実行されないようにする
 if __name__ == '__main__':
