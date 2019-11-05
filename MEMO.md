@@ -71,7 +71,7 @@ $ pipenv install beautifulsoup4
 # 2019-11-05
 
 - `write_text()` では `newline = '\n'` が指定できなかった
-- Docker Compose 使ってみる
+- Docker Compose でまとめてみる
 
 ```sh
 $ docker-compose up -d
@@ -85,4 +85,9 @@ CONTAINER ID        IMAGE                                COMMAND               C
 
 $ docker exec -it my-python bash
 # docker-dompose.yaml の working_dir で指定したディレクトリで bash 接続できる
+
+# 環境構築・実行
+$$ pipenv install -dev
+$$ pipenv run crawl
+$$ pipenv run scrape
 ```

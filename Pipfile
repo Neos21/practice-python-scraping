@@ -11,6 +11,7 @@ scrape = "python example_scrape.py"
 
 [dev-packages]
 pylint = "*"
+v = {editable = true,version = "*"}
 
 [packages]
 selenium = "*"
