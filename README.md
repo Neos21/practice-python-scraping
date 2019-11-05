@@ -12,7 +12,7 @@ Python でスクレイピングするサンプルスクリプト。Docker・Dock
 $ pip install pipenv
 
 # pipenv で環境復元する
-$ pipenv install --dev
+$ pipenv install -dev
 
 # Chrome を使ったクローリングスクリプトを実行する
 $ pipenv run crawl
