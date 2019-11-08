@@ -5,13 +5,14 @@ Python でスクレイピングするサンプルスクリプト。Docker・Dock
 
 ## How To Use
 
-- ローカルの Python 環境で実行する場合
+- ローカルの Python 環境、もしくは Python が実行可能な Docker コンテナ内で実行する場合
+    - Python 3.7・pip3・Chrome ブラウザは各自インストールしておく
 
 ```sh
-# Python 3.7・pip3 は各自インストールしておく・pipenv をインストールする
+# pipenv をインストールする
 $ pip install pipenv
 
-# pipenv で環境復元する
+# pipenv で環境を復元する
 $ pipenv install -dev
 
 # Chrome を使ったクローリングスクリプトを実行する
@@ -23,7 +24,7 @@ $ pipenv run scrape
 # → ./json/google.json が生成される
 ```
 
-- Docker で実行する場合
+- Docker Compose で実行する場合
 
 ```sh
 # Docker イメージを作成し my-python コンテナを起動する

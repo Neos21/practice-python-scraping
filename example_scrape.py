@@ -86,8 +86,8 @@ def scrape(soup):
   # 格納順序を保持する場合は 'import collections' し 'collections.OrderedDict()' で初期化する
   scrapedDict = {}
   
-  # id 指定で要素を1つ取得してみる : select() を使うと CSS セレクタで取得できる
-  scrapedDict['my_text'] = soup.select('a.gb_e')[0].string
+  # CSS セレクタ指定で要素を1つ取得してみる : select() を使うと CSS セレクタで取得できる
+  scrapedDict['my_text'] = soup.select('a')[0].string
   print('my_text')
   print('  ' + scrapedDict['my_text'])
   

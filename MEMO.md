@@ -15,6 +15,8 @@
 - https://qiita.com/Azunyan1111/items/b161b998790b1db2ff7a
   - スクレイピング
 
+環境構築メモ。
+
 ```sh
 # pip3 で pipenv をインストールする
 $ pip install pipenv
