@@ -13,7 +13,7 @@ Python でスクレイピングするサンプルスクリプト。Docker・Dock
 $ pip install pipenv
 
 # pipenv で環境を復元する
-$ pipenv install -dev
+$ pipenv install --dev
 
 # Chrome を使ったクローリングスクリプトを実行する
 $ pipenv run crawl
@@ -34,7 +34,7 @@ $ docker-compose up -d
 $ docker exec -it my-python bash
 
 # 環境構築・実行
-$$ pipenv install -dev
+$$ pipenv install --dev
 $$ pipenv run crawl
 $$ pipenv run scrape
 ```
